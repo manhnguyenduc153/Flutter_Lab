@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/Car.dart';
+import 'package:flutter_application_1/models/ElectricCar.dart';
 
 void main() {
   Exercise1();
   Exercise2();
   Exercise3();
+  Exercise4();
+  Exercise5();
+
 }
 
 void Exercise1(){
@@ -36,7 +41,7 @@ void Exercise2(){
   for(int i = 0; i < integers.length; i++){
     integers[i] > 0 ? (sumAllPositive += integers[i]) : sumAllPositive += 0;
     integers[i] < 0 ? (minusAllNegative -= integers[i]) : minusAllNegative -= 0;
-    
+
     if(integers[i] == 0){
       countZero++;
     }else{
@@ -162,5 +167,55 @@ int add(int a, int b) {
 
 int multiply(int a, int b) => a * b;
 
+void Exercise4(){
+  String name = "Ecar1";
+  String brand = "Ebrand1";
 
+  Car car = new Car(name + "Car", brand + "Car");
+  ElectricCar ecar = new ElectricCar(name, brand);
 
+  print("=========================== Exercise 4 ===========================");
+  print(car.getInfo());
+  print(ecar.getInfo());
+}
+
+void Exercise5() async{
+  print("Wait for exercise 5...");
+  print("--------------------------- 5.1 and 5.2 ---------------------------");
+  String myName = await fetchName();
+
+  print("--------------------------- 5.3 ---------------------------");
+  int? nullableNumber;
+  int displayNumber = nullableNumber ?? 0;
+  String? phone = "0123456789";
+  String? address;
+
+  print("My name: $myName");
+  print("Nullable number: $nullableNumber");
+  print("Display number: $displayNumber");
+
+  print("Null assertion");
+  print(phone!);
+  // print(address!);
+
+  print("--------------------------- 5.4 ---------------------------");
+  listenStream();
+}
+
+Future<String> fetchName() async{
+  await Future.delayed(Duration(seconds: 5));
+  return "Nguyen Duc Manh";
+}
+
+Stream<int> numberStream() async*{
+  for(int i = 0; i <= 5; i ++){
+    await Future.delayed(Duration(seconds: 1));
+    yield i;
+  }
+}
+
+void listenStream() async {
+  await for(int num in numberStream()){
+    print("Stream value: $num");
+  }
+}
